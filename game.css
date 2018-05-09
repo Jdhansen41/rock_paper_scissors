@@ -1,0 +1,23 @@
+h1{
+	
+	color: white;
+	font-size: 60px;
+	font-family: 'Lobster', cursive;
+}
+p{
+	font-size: 12px;
+	color: white;
+	margin-top: -10px;
+}
+
+body{
+	height: 100%;
+	width: 100%;
+}
+
+.jumbotron{
+	height: 400px;
+	background-size: auto;
+	background-repeat: no-repeat;
+	background: url("https://images.pexels.com/photos/995939/pexels-photo-995939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+}

@@ -1,115 +1,116 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock, Papper, Scissors</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
 <html>
-	<head>
-		<title>Game</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="game.css">
-		
-	</head>
-	<body>
-		<div class="jumbotron">
-			<div class="text-center">
-			<h1 style="margin-bottom: 50px;">Game Time</h1>
-			<button class="btn btn-primary" onClick="game()">Play Game</button>
-			<button class="btn btn-warning" onClick="reset()">Reset Score</button>
-		</div>
-		</div>
-		<div class="text-center">
-			<h3 style="display: inline-block;">User: <span id="userScore">0</span>  </h3>
-			<h3 style="display: inline-block;">Computer: <span id="compScore">0</span></h3>
-		</div>
-		
-		<script>
-			const choices = ["rock", "paper", "scissors"];
-			let userScore = 0;
-			let compScore = 0;
-			const displayUserScore = document.getElementById("userScore");
-			const displayCompScore = document.getElementById("compScore");
+  <head>
+    <title>Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+    
+  </head>
+  <body>
+    <div class="jumbotron text-center">
+      <div class="text-center" style="padding: 20px;">
+      <h1>Game Time</h1>
+      <p style="margin-bottom: 70px;">Created By Josh Hansen, 2018.</p>
+      
+      <button class="btn btn-warning" onClick="reset()">Reset Score</button>
+    </div>
+    <button class="btn" onclick="playerRound('rock')">Rock</button>
+     <button class="btn btn-primary" onclick="playerRound('paper')">Paper</button>
+      <button class="btn btn-info" onclick="playerRound('scissors')">Scissors</button>
+    </div>
+    <div class="text-center" id="bottom">
+      <h3 style="display: inline-block;">User: <span id="userScore">0</span>  </h3>
+      <h3 style="display: inline-block;">Computer: <span id="compScore">0</span></h3>
+    </div>
+    
+    <script>
+      const choices = ["rock", "paper", "scissors"];
+      let userScore = 0;
+      let compScore = 0;
+      const displayUserScore = document.getElementById("userScore");
+      const displayCompScore = document.getElementById("compScore");
+      const backCol = document.querySelector("body");
 
 
-			function playRound(comp,user){
-				let compChoice = comp.toLowerCase();
-				let userChoice = user.toLowerCase();
-				console.log(comp, user);
-				if(compChoice === userChoice){
-					console.log("Everyone loses, it's a tie");
-				}else
-				if(compChoice === "rock" && userChoice === "paper"){
-					console.log("You win!");
-					userScore += 1;
-				}else
-				if(compChoice === "rock" && userChoice === "scissors"){
-					console.log("You lose!");
-					compScore += 1;
-				}else
-				if(compChoice === "rock" && userChoice === "scissors"){
-					console.log("You lose!");
-					compScore += 1;
-				}else
-				if(compChoice === "paper" && userChoice === "scissors"){
-					console.log("You win!");
-					userScore += 1;
-				}else
-				if(compChoice === "paper" && userChoice === "rock"){
-					console.log("You lose!");
-					compScore += 1;
-				}else
-				if(compChoice === "scissors" && userChoice === "paper"){
-					console.log("You lose!");
-					compScore += 1;
-				}else
-				if(compChoice === "scissors" && userChoice === "rock"){
-					console.log("You win!");
-					userScore += 1;
-				}
-				
+      function playerRound(user){
+        backCol.style.background = "yellow";
+        var comp = computerPlay();
+        var colorChoice = "white";
+        var compChoice = comp.toLowerCase();
+        var userChoice = user.toLowerCase();
+        console.log(comp, user);
+        if(compChoice == userChoice){
+          colorChoice = "#98fb98";
+        }else
+        if(compChoice == "rock" && userChoice == "paper"){
+          console.log("You win!");
+          colorChoice = "#98fb98";
+          userScore += 1;
+        }else
+        if(compChoice == "rock" && userChoice == "scissors"){
+          console.log("You lose!");
+          colorChoice = "#FF5C5C";
+          compScore += 1;
+        }else
+        if(compChoice == "rock" && userChoice == "scissors"){
+          console.log("You lose!");
+          colorChoice = "#FF5C5C";
+          compScore += 1;
+        }else
+        if(compChoice == "paper" && userChoice == "scissors"){
+          console.log("You win!");
+          colorChoice = "#98fb98";
+          userScore += 1;
+        }else
+        if(compChoice == "paper" && userChoice == "rock"){
+          console.log("You lose!");
+          colorChoice = "#FF5C5C";
+          compScore += 1;
+        }else
+        if(compChoice == "scissors" && userChoice == "paper"){
+          console.log("You lose!");
+          colorChoice = "#FF5C5C";
+          compScore += 1;
+        }else
+        if(compChoice == "scissors" && userChoice == "rock"){
+          console.log("You win!");
+          colorChoice = "#98fb98";
+          userScore += 1;
+        }
+        updateScore(userScore, compScore, colorChoice);
+      }
+        
+      function updateScore(x,y,z){
+
+        displayUserScore.textContent = x;
+        displayCompScore.textContent = y;
+        backCol.style.background = z;
+      }
 
 
-				if(window.prompt("Play again? (Yes/No)?").toLowerCase() === "yes"){
-				displayUserScore.innerHTML = userScore;
-				displayCompScore.innerHTML = compScore;
-					game();
-				}
-			}
+      function computerPlay(){
+        
+        var choice = choices[Math.floor(Math.random() * 3)];
+        return choice;
+      }
 
-			function checkPrompt(choice){
-				if(choices.indexOf(choice.toLowerCase()) >= 0){
-					console.log("true");
-					return true;
-				}
-				else{
-					return false;
-				}
-			}
+      function reset(){
+        compScore = 0;
+        userScore = 0;
+        displayUserScore.innerHTML = userScore;
+        displayCompScore.innerHTML = compScore;
+        backCol.style.background = "white";
+      }
 
-			function computerPlay(){
-				
-				var choice = choices[Math.floor(Math.random() * 2)];
-				return choice;
-			}
-
-			function reset(){
-				compScore = 0;
-				userScore = 0;
-				displayUserScore.innerHTML = userScore;
-				displayCompScore.innerHTML = compScore;
-			}
-
-			function game(){
-
-				var computer = computerPlay();
-				const playerSelection = window.prompt("Rock, Paper, or Scissors?");
-				const auth = checkPrompt(playerSelection);
-				if(auth == true){
-					playRound(computer, playerSelection);
-				}
-				else{
-					alert("Please enter a rock, paper, or scissors");
-					game();
-				}
-
-			}
-
-			
-		</script>
-	</body>
+      
+    </script>
+  </body>
 </html>
